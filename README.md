@@ -10,6 +10,7 @@ APP_ENV=dev
 APP_SECRET=app_secret
 
 DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
+```
 
 Run `composer install` inside the root directory, this will create a vendor directory with the dependencies.
 
