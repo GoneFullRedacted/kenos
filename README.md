@@ -17,9 +17,9 @@ Run `php bin/console doctrine:database:create` to create the database.
 
 Run `php bin/console doctrine:migrations:migrate` to update the database.
 
-## Définition des normes de synthaxe et organisationnelles du projet
+## Définition des normes de syntaxe et organisationnelles du projet
 
-### Normes synthaxique
+### Normes syntaxique
 
 - Les indentations sont faites via des tabulations
 - Double saut de ligne entre les méthodes
