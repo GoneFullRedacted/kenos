@@ -34,10 +34,27 @@ class Posts
     #[ORM\ManyToMany(targetEntity: categories::class, inversedBy: 'posts')]
     private Collection $posts_has_categories;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    private ?Users $user = null;
+
+    /**
+     * @var Collection<int, postspics>
+     */
+    #[ORM\OneToMany(targetEntity: postspics::class, mappedBy: 'posts')]
+    private Collection $postspics;
+
+    /**
+     * @var Collection<int, postcomments>
+     */
+    #[ORM\OneToMany(targetEntity: postcomments::class, mappedBy: 'posts')]
+    private Collection $postscomments;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->posts_has_categories = new ArrayCollection();
+        $this->postspics = new ArrayCollection();
+        $this->postscomments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +133,78 @@ class Posts
     public function removePostsHasCategory(categories $postsHasCategory): static
     {
         $this->posts_has_categories->removeElement($postsHasCategory);
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, postspics>
+     */
+    public function getPostspics(): Collection
+    {
+        return $this->postspics;
+    }
+
+    public function addPostspic(postspics $postspic): static
+    {
+        if (!$this->postspics->contains($postspic)) {
+            $this->postspics->add($postspic);
+            $postspic->setPosts($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostspic(postspics $postspic): static
+    {
+        if ($this->postspics->removeElement($postspic)) {
+            // set the owning side to null (unless already changed)
+            if ($postspic->getPosts() === $this) {
+                $postspic->setPosts(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, postcomments>
+     */
+    public function getPostscomments(): Collection
+    {
+        return $this->postscomments;
+    }
+
+    public function addPostscomment(postcomments $postscomment): static
+    {
+        if (!$this->postscomments->contains($postscomment)) {
+            $this->postscomments->add($postscomment);
+            $postscomment->setPosts($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostscomment(postcomments $postscomment): static
+    {
+        if ($this->postscomments->removeElement($postscomment)) {
+            // set the owning side to null (unless already changed)
+            if ($postscomment->getPosts() === $this) {
+                $postscomment->setPosts(null);
+            }
+        }
 
         return $this;
     }

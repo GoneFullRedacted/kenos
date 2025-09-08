@@ -64,9 +64,33 @@ class Users
     #[ORM\ManyToMany(targetEntity: posts::class, inversedBy: 'users')]
     private Collection $likes;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?locations $locations = null;
+
+    /**
+     * @var Collection<int, news>
+     */
+    #[ORM\OneToMany(targetEntity: news::class, mappedBy: 'users')]
+    private Collection $news;
+
+    /**
+     * @var Collection<int, posts>
+     */
+    #[ORM\OneToMany(targetEntity: posts::class, mappedBy: 'user')]
+    private Collection $posts;
+
+    /**
+     * @var Collection<int, Postcomments>
+     */
+    #[ORM\OneToMany(targetEntity: Postcomments::class, mappedBy: 'author_id')]
+    private Collection $postcomments;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
+        $this->news = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->postcomments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,6 +286,108 @@ class Users
     public function removeLike(posts $like): static
     {
         $this->likes->removeElement($like);
+
+        return $this;
+    }
+
+    public function getLocations(): ?locations
+    {
+        return $this->locations;
+    }
+
+    public function setLocations(?locations $locations): static
+    {
+        $this->locations = $locations;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, news>
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(news $news): static
+    {
+        if (!$this->news->contains($news)) {
+            $this->news->add($news);
+            $news->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(news $news): static
+    {
+        if ($this->news->removeElement($news)) {
+            // set the owning side to null (unless already changed)
+            if ($news->getUsers() === $this) {
+                $news->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, posts>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(posts $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(posts $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Postcomments>
+     */
+    public function getPostcomments(): Collection
+    {
+        return $this->postcomments;
+    }
+
+    public function addPostcomment(Postcomments $postcomment): static
+    {
+        if (!$this->postcomments->contains($postcomment)) {
+            $this->postcomments->add($postcomment);
+            $postcomment->setAuthorId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostcomment(Postcomments $postcomment): static
+    {
+        if ($this->postcomments->removeElement($postcomment)) {
+            // set the owning side to null (unless already changed)
+            if ($postcomment->getAuthorId() === $this) {
+                $postcomment->setAuthorId(null);
+            }
+        }
 
         return $this;
     }

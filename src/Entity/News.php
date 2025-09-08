@@ -20,6 +20,12 @@ class News
     #[ORM\Column]
     private ?\DateTime $date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'news')]
+    private ?Users $users = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?newspics $newspics = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class News
     public function setDate(\DateTime $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): static
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function getNewspics(): ?newspics
+    {
+        return $this->newspics;
+    }
+
+    public function setNewspics(?newspics $newspics): static
+    {
+        $this->newspics = $newspics;
 
         return $this;
     }

@@ -16,6 +16,9 @@ class Postspics
     #[ORM\Column(length: 255)]
     private ?string $postspics = null;
 
+    #[ORM\ManyToOne(inversedBy: 'postspics')]
+    private ?Posts $posts = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Postspics
     public function setPostspics(string $postspics): static
     {
         $this->postspics = $postspics;
+
+        return $this;
+    }
+
+    public function getPosts(): ?Posts
+    {
+        return $this->posts;
+    }
+
+    public function setPosts(?Posts $posts): static
+    {
+        $this->posts = $posts;
 
         return $this;
     }

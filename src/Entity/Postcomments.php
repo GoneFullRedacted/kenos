@@ -17,6 +17,12 @@ class Postcomments
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[ORM\ManyToOne(inversedBy: 'postscomments')]
+    private ?Posts $posts = null;
+
+    #[ORM\ManyToOne(inversedBy: 'postcomments')]
+    private ?users $author_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -30,6 +36,30 @@ class Postcomments
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getPosts(): ?Posts
+    {
+        return $this->posts;
+    }
+
+    public function setPosts(?Posts $posts): static
+    {
+        $this->posts = $posts;
+
+        return $this;
+    }
+
+    public function getAuthorId(): ?users
+    {
+        return $this->author_id;
+    }
+
+    public function setAuthorId(?users $author_id): static
+    {
+        $this->author_id = $author_id;
 
         return $this;
     }
