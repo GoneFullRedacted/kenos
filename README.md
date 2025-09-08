@@ -1,6 +1,6 @@
-# Projet Kelos
+# Projet Kenos
 
-Le projet Kelos est un réseau social fictif d'entreprise pour la franchise de chocolaterie Kelos. 
+Le projet Kenos est un réseau social fictif d'entreprise pour la franchise de chocolaterie Kenos. 
 
 ## Installation
 
@@ -30,7 +30,7 @@ Run `php bin/console doctrine:migrations:migrate` to update the database.
 - camelCase pour php/js
 - kebab-case pour html/css
 
-### Répartition des tâches pour le projet Kelos.
+### Répartition des tâches pour le projet Kenos.
 
 Sébastien : 
 
