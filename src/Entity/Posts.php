@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,17 @@ class Posts
 
     #[ORM\Column]
     private ?\DateTime $date = null;
+
+    /**
+     * @var Collection<int, Users>
+     */
+    #[ORM\ManyToMany(targetEntity: Users::class, mappedBy: 'likes')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +58,33 @@ class Posts
     public function setDate(\DateTime $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeLike($this);
+        }
 
         return $this;
     }

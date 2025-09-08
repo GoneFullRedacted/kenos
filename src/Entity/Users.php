@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -55,6 +57,17 @@ class Users
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilepic = null;
+
+    /**
+     * @var Collection<int, posts>
+     */
+    #[ORM\ManyToMany(targetEntity: posts::class, inversedBy: 'users')]
+    private Collection $likes;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -225,6 +238,30 @@ class Users
     public function setProfilepic(?string $profilepic): static
     {
         $this->profilepic = $profilepic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, posts>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(posts $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(posts $like): static
+    {
+        $this->likes->removeElement($like);
 
         return $this;
     }
