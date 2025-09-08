@@ -28,9 +28,16 @@ class Posts
     #[ORM\ManyToMany(targetEntity: Users::class, mappedBy: 'likes')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, categories>
+     */
+    #[ORM\ManyToMany(targetEntity: categories::class, inversedBy: 'posts')]
+    private Collection $posts_has_categories;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->posts_has_categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +92,30 @@ class Posts
         if ($this->users->removeElement($user)) {
             $user->removeLike($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, categories>
+     */
+    public function getPostsHasCategories(): Collection
+    {
+        return $this->posts_has_categories;
+    }
+
+    public function addPostsHasCategory(categories $postsHasCategory): static
+    {
+        if (!$this->posts_has_categories->contains($postsHasCategory)) {
+            $this->posts_has_categories->add($postsHasCategory);
+        }
+
+        return $this;
+    }
+
+    public function removePostsHasCategory(categories $postsHasCategory): static
+    {
+        $this->posts_has_categories->removeElement($postsHasCategory);
 
         return $this;
     }
