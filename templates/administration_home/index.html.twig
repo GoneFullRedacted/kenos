@@ -9,37 +9,48 @@
 {% block body %}
     <header class="AdminHeader">
         <img src="{{ asset('assets/images/logo-david-kenos.png') }}" alt="Logo" class="AdminLogo">
+        
+            <h1><span>Bienvenue,</span><br>dans votre administration</h1>
+        
         <nav class="AdminNav">
             <a href="#">Accueil</a>
-            <a href="#">Déconnexion</a>
+            <a href="#">Déconnexion ⏻ </a>
             <a href="#">Chocolaterie Nevers</a>
             <div class="AdminAvatar"></div>
         </nav>
     </header>
 
-    <section class="AdminWelcome">
-        <h1><span>Bienvenue,</span><br>dans votre administration</h1>
-    </section>
-
     <section class="AdminDashboard">
-        <div class="Card">
-            <div class="Circle">10</div>
-            <h2>UTILISATEURS</h2>
-            <p>sont inscrits</p>
-            <button class="AdminButton">Gérer les utilisateurs</button>
+        <div class="cardGroup">
+            <div class="Card">
+                <div class="cardTop">
+                    <div class="Circle">10</div>
+                    <div class="cardText">
+                        <h2>UTILISATEURS</h2>
+                        <p>sont inscrits</p>
+                    </div>
+                </div>
+                <button class="AdminButton">Gérer les utilisateurs</button>
+            </div>
+            <div class="Card">
+                <div class="cardTop">
+                    <div class="Circle">5</div>
+                    <div class="cardText">
+                        <h2>CATÉGORIES</h2>
+                        <p>de posts sont disponibles</p>
+                    </div>
+                </div>
+                <button class="AdminButton">Gérer les catégories</button>
+            </div>
         </div>
-
-        <div class="Card">
-            <div class="Circle">5</div>
-            <h2>CATÉGORIES</h2>
-            <p>de posts sont disponibles</p>
-            <button class="AdminButton">Gérer les catégories</button>
-        </div>
-
         <div class="Card CardLarge">
-            <div class="Circle">35</div>
-            <h2>ACTUALITÉS</h2>
-            <p>sont disponibles</p>
+            <div class="cardTop">
+                <div class="Circle">35</div>
+                <div class="cardText">
+                    <h2>ACTUALITÉS</h2>
+                    <p>sont disponibles</p>
+                </div>
+            </div>
             <ul class="NewsList">
                 <li>Le 12/09/2021 – Lorem ipsum dolor sit amet</li>
                 <li>Le 12/09/2021 – Lorem ipsum dolor sit amet</li>
@@ -49,9 +60,13 @@
         </div>
 
         <div class="Card">
-            <div class="Circle">48</div>
-            <h2>POSTS</h2>
-            <p>sont disponibles</p>
+            <div class="cardTop">
+                <div class="Circle">48</div>
+                <div class="cardText">
+                    <h2>POSTS</h2>
+                    <p>sont disponibles</p>
+                </div>
+            </div>
             <button class="AdminButton">Gérer les posts</button>
         </div>
     </section>
