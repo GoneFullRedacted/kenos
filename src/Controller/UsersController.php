@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class UsersController extends AbstractController
 {
     #[Route(name: 'app_users_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(UsersRepository $usersRepository): Response
     {
         return $this->render('users/index.html.twig', [
@@ -23,6 +24,7 @@ final class UsersController extends AbstractController
     }
 
     #[Route('/new', name: 'app_users_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new Users();
@@ -43,6 +45,7 @@ final class UsersController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_users_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Users $user): Response
     {
         return $this->render('users/show.html.twig', [
@@ -51,6 +54,7 @@ final class UsersController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_users_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UsersType::class, $user);
@@ -69,6 +73,7 @@ final class UsersController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
