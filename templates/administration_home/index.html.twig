@@ -7,46 +7,46 @@
 {% endblock %}
 
 {% block body %}
-    <header class="AdminHeader">
-        <img src="{{ asset('assets/images/logo-david-kenos.png') }}" alt="Logo" class="AdminLogo">
+    <header class="admin-header">
+        <img src="{{ asset('assets/images/logo-david-kenos.png') }}" alt="Logo" class="admin-logo">
         
             <h1><span>Bienvenue,</span><br>dans votre administration</h1>
         
-        <nav class="AdminNav">
+        <nav class="admin-nav">
             <a href="#">Accueil</a>
             <a href="#">Déconnexion ⏻ </a>
             <a href="#">Chocolaterie Nevers</a>
-            <div class="AdminAvatar"></div>
+            <div class="admin-avatar"></div>
         </nav>
     </header>
 
-    <section class="AdminDashboard">
-        <div class="cardGroup">
-            <div class="Card">
-                <div class="cardTop">
-                    <div class="Circle">10</div>
-                    <div class="cardText">
+    <section class="admin-dashboard">
+        <div class="card-group">
+            <div class="card">
+                <div class="card-top">
+                    <div class="circle">10</div>
+                    <div class="card-text">
                         <h2>UTILISATEURS</h2>
                         <p>sont inscrits</p>
                     </div>
                 </div>
-                <button class="AdminButton">Gérer les utilisateurs</button>
+                <button class="admin-button">Gérer les utilisateurs</button>
             </div>
-            <div class="Card">
-                <div class="cardTop">
-                    <div class="Circle">5</div>
-                    <div class="cardText">
+            <div class="card">
+                <div class="card-top">
+                    <div class="circle">5</div>
+                    <div class="card-text">
                         <h2>CATÉGORIES</h2>
                         <p>de posts sont disponibles</p>
                     </div>
                 </div>
-                <button class="AdminButton">Gérer les catégories</button>
+                <button class="admin-button">Gérer les catégories</button>
             </div>
         </div>
-        <div class="Card CardLarge">
-            <div class="cardTop">
-                <div class="Circle">35</div>
-                <div class="cardText">
+        <div class="card card-large">
+            <div class="card-top">
+                <div class="circle">35</div>
+                <div class="card-text">
                     <h2>ACTUALITÉS</h2>
                     <p>sont disponibles</p>
                 </div>
@@ -56,22 +56,22 @@
                 <li>Le 12/09/2021 – Lorem ipsum dolor sit amet</li>
                 <li>Le 12/09/2021 – Lorem ipsum dolor sit amet</li>
             </ul>
-            <button class="AdminButton">Gérer les actualités</button>
+            <button class="admin-button">Gérer les actualités</button>
         </div>
 
-        <div class="Card">
-            <div class="cardTop">
-                <div class="Circle">48</div>
-                <div class="cardText">
+        <div class="card">
+            <div class="card-top">
+                <div class="circle">48</div>
+                <div class="card-text">
                     <h2>POSTS</h2>
                     <p>sont disponibles</p>
                 </div>
             </div>
-            <button class="AdminButton">Gérer les posts</button>
+            <button class="admin-button">Gérer les posts</button>
         </div>
     </section>
 
-    <footer class="AdminFooter">
+    <footer class="admin-footer">
         Administration développé par EILEA - 2021
     </footer>
 {% endblock %}
