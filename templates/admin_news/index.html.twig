@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin · News{% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+{% endblock %}
+{% block body %}
+  {% include '_partials/alerts.html.twig' %}
+  <main class="crud-main">
+    <header class="page-header">
+      <h1 class="page-title">Gérer les news</h1>
+      <div class="toolbar">
+        <a class="btn btn--primary" href="{{ path('app_admin_news_new') }}">+ Nouvelle news</a>
+      </div>
+    </header>
+    <section class="crud-table-wrap">
+      <div class="crud-table-scroller">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th style="width:90px">ID</th>
+              <th>Titre</th>
+              <th style="width:160px">Date</th>
+              <th style="width:160px">Auteur</th>
+              <th class="text-right" style="width:220px">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for n in news %}
+            <tr>
+              <td class="cell--num">#{{ n.id }}</td>
+              <td><div class="truncate" title="{{ n.title }}">{{ n.title }}</div></td>
+              <td>{{ n.date ? n.date|date('d/m/Y') : '—' }}</td>
+              <td>{{ n.users ? n.users.id : '—' }}</td>
+              <td class="cell-actions">
+                <a class="btn btn--ghost" href="{{ path('app_admin_news_show', {id:n.id}) }}">Voir</a>
+                <a class="btn btn--primary" href="{{ path('app_admin_news_edit', {id:n.id}) }}">Modifier</a>
+                <form class="inline-form" method="post" action="{{ path('app_admin_news_delete', {id:n.id}) }}" onsubmit="return confirm('Supprimer cette news ?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ n.id) }}">
+                  <button class="btn btn--danger" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-muted">Aucune news.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+{% endblock %}

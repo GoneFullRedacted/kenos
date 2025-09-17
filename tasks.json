@@ -1,14 +1,135 @@
-// Less configuration
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Less Compile",
+      "label": "LESS: Compile All",
       "type": "shell",
-      "command": "lessc styles.less styles.css",
-      "group": "build"
+      "command": "gulp",
+      "args": ["less"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Watch Mode",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["watch"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Build Production",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["build"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile App Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:app"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile Admin Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:admin"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile User Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:user"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile Components Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:components"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile Layout Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:layout"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LESS: Compile Pages Only",
+      "type": "shell",
+      "command": "gulp",
+      "args": ["less:pages"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
     }
   ]
 }

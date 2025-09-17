@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin · Nouvelle news{% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+{% endblock %}
+{% block body %}
+  {% include '_partials/alerts.html.twig' %}
+  <main class="crud-main">
+    <header class="page-header">
+      <h1 class="page-title">Nouvelle news</h1>
+      <div class="toolbar">
+        <a class="btn btn--ghost" href="{{ path('app_admin_news_index') }}">← Retour</a>
+      </div>
+    </header>
+
+    <section class="card-form">
+      {{ form_start(form, {attr:{class:'form-grid'}}) }}
+        <div class="form-row">
+          {{ form_label(form.title, 'Titre', { label_attr: { class: 'form-label' } }) }}
+          {{ form_widget(form.title, { attr: { class: 'form-control' ~ (form_errors(form.title) ? ' is-invalid' : ''), placeholder: 'Titre de la news', maxlength: 120 } }) }}
+          {{ form_errors(form.title) }}
+        </div>
+
+        <div class="form-row">
+          {{ form_label(form.content, 'Contenu', {label_attr:{class:'form-label'}}) }}
+          {{ form_widget(form.content, {attr:{class:'form-control'}}) }}
+          {{ form_errors(form.content) }}
+        </div>
+
+        <div class="form-row">
+          {{ form_label(form.date, 'Date', {label_attr:{class:'form-label'}}) }}
+          {{ form_widget(form.date, {attr:{class:'form-control'}}) }}
+          {{ form_errors(form.date) }}
+        </div>
+
+        <div class="form-row">
+          {{ form_label(form.users, 'Auteur', {label_attr:{class:'form-label'}}) }}
+          {{ form_widget(form.users, {attr:{class:'form-control'}}) }}
+          {{ form_errors(form.users) }}
+        </div>
+
+        <div class="form-row">
+          {{ form_label(form.newspics, 'Image (optionnel)', {label_attr:{class:'form-label'}}) }}
+          {{ form_widget(form.newspics, {attr:{class:'form-control'}}) }}
+          {{ form_errors(form.newspics) }}
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn--primary" type="submit">Enregistrer</button>
+          <a class="btn btn--ghost" href="{{ path('app_admin_news_index') }}">Annuler</a>
+        </div>
+      {{ form_end(form) }}
+    </section>
+  </main>
+{% endblock %}

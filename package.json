@@ -1,6 +1,25 @@
 {
-  "dependencies": {
-    "gulp": "^5.0.1",
-    "gulp-less": "^5.0.0"
+  "name": "symfony-assets-compilation",
+  "version": "1.0.0",
+  "description": "Configuration Gulp pour compilation LESS modulaire",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "compile:app": "gulp less:app",
+    "compile:admin": "gulp less:admin",
+    "compile:user": "gulp less:user",
+    "compile:components": "gulp less:components",
+    "compile:layout": "gulp less:layout",
+    "compile:pages": "gulp less:pages"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-plumber": "^1.2.1"
   }
 }

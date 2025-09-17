@@ -16,6 +16,10 @@ class Newspics
     #[ORM\Column(length: 45)]
     private ?string $pics = null;
 
+    #[ORM\ManyToOne(inversedBy: 'newspics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?News $news = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +33,18 @@ class Newspics
     public function setPics(string $pics): static
     {
         $this->pics = $pics;
+
+        return $this;
+    }
+
+    public function getNews(): ?News
+    {
+        return $this->news;
+    }
+
+    public function setNews(?News $news): static
+    {
+        $this->news = $news;
 
         return $this;
     }
